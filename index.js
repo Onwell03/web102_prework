@@ -8,7 +8,17 @@
 import GAMES_DATA from './games.js';
 
 // create a list of objects to store the data about the games using JSON.parse
-const GAMES_JSON = JSON.parse(GAMES_DATA)
+// const GAMES_JSON = JSON.parse(GAMES_DATA)
+
+// update JSON.parse
+let GAMES_JSON = [];
+try {
+    GAMES_JSON = JSON.parse(GAMES_DATA);
+} catch (error) {
+    console.error('Error parsing JSON data:', error);
+    // Handle the error (e.g., provide default data or display an error message)
+}
+
 
 // remove all child elements from a parent element in the DOM
 function deleteChildElements(parent) {
@@ -89,7 +99,7 @@ const initial = 0
 const sumWithI = GAMES_JSON.reduce((x, y) => x + y['pledged'], initial);
 
 // set inner HTML using template literal
-raisedCard.innerHTML = `${sumWithI}`
+raisedCard.innerHTML = `$${sumWithI}`
 
 // grab number of games card and set its inner HTML
 const gamesCard = document.getElementById("num-games");
@@ -141,9 +151,33 @@ const fundedBtn = document.getElementById("funded-btn");
 const allBtn = document.getElementById("all-btn");
 
 // add event listeners with the correct functions to each button
-unfundedBtn.addEventListener("click", filterUnfundedOnly);
-fundedBtn.addEventListener("click", filterFundedOnly);
-allBtn.addEventListener("click", showAllGames);
+
+//unfundedBtn.addEventListener("click", filterUnfundedOnly);
+//fundedBtn.addEventListener("click", filterFundedOnly);
+//allBtn.addEventListener("click", showAllGames);
+
+// Update the button click event listeners
+unfundedBtn.addEventListener("click", function() {
+    filterUnfundedOnly();
+    setActiveButton(unfundedBtn);
+});
+
+fundedBtn.addEventListener("click", function() {
+    filterFundedOnly();
+    setActiveButton(fundedBtn);
+});
+
+allBtn.addEventListener("click", function() {
+    showAllGames();
+    setActiveButton(allBtn);
+});
+
+// Function to set the active button style
+function setActiveButton(activeButton) {
+    [unfundedBtn, fundedBtn, allBtn].forEach(btn => btn.classList.remove("active"));
+    activeButton.classList.add("active");
+}
+
 
 /*************************************************************************************
  * Challenge 6: Add more information at the top of the page about the company.
