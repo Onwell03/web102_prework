@@ -15,7 +15,7 @@ function deleteChildElements(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
-}
+} 
 
 /*****************************************************************************
  * Challenge 3: Add data about each game as a card to the games-container
@@ -40,11 +40,11 @@ function addGamesToPage(games) {
             <p>Goal: $${game.goal}</p>
             <p>Backers: ${game.backers}</p>
         `
-                // append the game to the games-container
+        // append the game to the games-container
         gamesContainer.append(gameCard);
     }
 
-
+    
         // create a new div element, which will become the game card
 
 
@@ -158,7 +158,7 @@ const result3 = GAMES_JSON.filter((game) => game['goal'] - game['pledged'] > 0);
 const unfunded = result3.length;
 
 // create a string that explains the number of unfunded games using the ternary operator
-const descrip = unfunded > 0 ? "We have some unfunded games on pur website, check them below!" : "All the games we have now on our webisite have been fully funded";
+const descrip = unfunded > 0 ? `We have ${unfunded} unfunded games on our website, check them below!` : "All the games we have now on our webisite have been fully funded";
 
 
 // create a new DOM element containing the template string and append it to the description container
